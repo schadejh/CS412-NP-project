@@ -1,0 +1,18 @@
+github comment
+
+problem description
+Max Clique
+given an undirected graph, find the largest subset S,
+such that for each member of S, there is an edge to
+all other members of S.
+Return one maximal clique, even if there are multiple.
+The decision variant of this problem tests if there is a clique
+of size k, returning true if so, false if not.
+
+program input format
+an undirected graph, G = (V), in the format of a dictionary
+V1 = v1, v2,...
+V2 = ...
+.
+.
+.
