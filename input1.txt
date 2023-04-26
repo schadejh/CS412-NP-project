@@ -2,6 +2,7 @@ A: B D
 B: A D
 C: A
 D: A B
+4  # this is the number of vertices
 
   A - C
  / \
