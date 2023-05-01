@@ -1,8 +1,8 @@
+4  # this is the number of vertices
 A: B D
 B: A D
 C: A
 D: A B
-4  # this is the number of vertices
 
   A - C
  / \
@@ -15,3 +15,11 @@ exact solution
 vs 
 
 approximation
+
+6
+A: B C D
+B: A C D
+C: A B D
+D: A B C
+E: F
+F: E
