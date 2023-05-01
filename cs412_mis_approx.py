@@ -2,110 +2,54 @@
     name: James Schader
     Approximation for Max Independent Set (MIS)
     MIS is complementary to Max Clique
+
+    This program will find the Minimum Independent Set of
+    the given graph. The given graph should be the complementary graph
+    of the main graph in which a maximal clique is being sought.
 """
 
-
-import itertools
-
-
-def getMIS(g):
-    s = set()
-    removedSet = set()
-    while len(g) > 0:  # while G is not empty do
-        v = g.pop()  # TODO: let v be a node of minimum degree in G
-        s.add(v)  # S <- S union {v}
-        if v in g and v not in removedSet:
-           removedSet.add(v)  # remove v...
-        for n in list(v.getNeighbors()):  # and its neighbors from G
-            if n not in removedSet:
-                removedSet.add(n)
-
-    print('final:')
-    for v in s:
-        print(v.getName())
-
-
-def retry(graph):
+def getMIS(graph):
     nodes = sorted(list(graph.keys()), key=lambda x: len(graph[x]))
-    # nodes are sorted by degree (ascending)
+    # nodes are sorted by degree (ascending), so that v is selected
+    # as a node with min degree in G
 
-    mis = set()
-    rottenSet = set()
-    for i in range(len(nodes)):
-        v = nodes[i]
+    mis = set()  # S <- ø
+    rottenSet = set()  # this set is to mark rotten nodes, i.e. nodes
+                       # that are known to have neighbors and won't work
+                       # in this MIS
+    for i in range(len(nodes)):  # while G is not empty do
+        v = nodes[i]  # let v be a node of min degree in G
         if v not in rottenSet:
-            mis.add(v)
-            rottenSet.add(v)  # remove v and its neighbors...
+            mis.add(v)  # S <- S u {v}
+            rottenSet.add(v)  # remove v...
         for n in list(graph[v]):
-            rottenSet.add(n)
-    
-    return mis
-
-
-    # max_clique_size = 0
-    # max_clique = set()
-
-    # for subset_size in range(1, len(nodes) + 1):
-    #     for subset in itertools.combinations(nodes, subset_size):
-    #         if subset_size > max_clique_size:
-    #             max_clique_size = subset_size
-    #             max_clique = set(subset)
-    # return max_clique
+            rottenSet.add(n)  # and its neighbors from G
+                              # here done by marking it as rotten
+    # end 'while'
+    return mis  # Output S
 
 
 def main():
 
-    class node():
-        def __init__(self, name, d, n):
-            self.name = name
-            self.degree = d
-            self.neighbors = n
+    graph = {}
+    nodes = int(input())
+    for _ in range(nodes):
+        line = input()
+        print('parsing:' + line)
+        spline = line.split()
         
-        def getName(self):
-            return self.name
+        graph[spline[0]] = [] if len(spline) < 2 else spline[1:]
 
-        def getDegree(self):
-            return self.degree
-        
-        def getNeighbors(self):
-            return self.neighbors
-        
-        def setNeighbors(self, newNeighbors):
-            self.neighbors = newNeighbors
+    # graph = {
+    #     'A': ['B', 'C', 'D'],
+    #     'B': ['A', 'C', 'D'],
+    #     'C': ['A', 'B'],
+    #     'D': ['A', 'B'],
+    #     'E': ['F'],
+    #     'F': ['E'],
+    # }
 
-    graph = {
-        'A': ['B', 'C', 'D'],
-        'B': ['A', 'C', 'D'],
-        'C': ['A', 'B'],
-        'D': ['A', 'B'],
-        'E': ['F'],
-        'F': ['E'],
-    }
-
-    nA = node('', 3, [])
-    nB = node('', 3, [])
-    nC = node('', 3, [])
-    nD = node('', 3, [])
-    nE = node('', 3, [])
-    nF = node('', 2, [])
-
-    nA.setNeighbors([nE, nF])
-    nB.setNeighbors([nE, nF])
-    nC.setNeighbors([nE, nF])
-    nD.setNeighbors([nE, nF])
-    nE.setNeighbors([nA, nB, nC, nD])
-    nF.setNeighbors([nA, nB, nC, nD])
-    g = {nA, nB, nC, nD, nE, nF}
-
-    # nC = node('c',1,[])
-    # nA = node('a',1,[nC])
-    # nB = node('b',0,[])
-    # nC.setNeighbors([nA])
-    # g = {nA,nB,nC}  # list of nodes, sorted ascending by degree
-
-    # getMIS(g)
-
-    print(retry(graph))
+    print(getMIS(graph))
 
 
 if __name__ == "__main__":
