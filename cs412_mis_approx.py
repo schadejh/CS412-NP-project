@@ -38,7 +38,7 @@ def main():
         print('parsing:' + line)
         spline = line.split()
         
-        graph[spline[0]] = [] if len(spline) < 2 else spline[1:]
+        graph[spline[0]] = spline[1:]
 
     # graph = {
     #     'A': ['B', 'C', 'D'],
