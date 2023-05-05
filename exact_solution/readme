@@ -1,5 +1,44 @@
-To run my code on a custom input, simply hit run and enter the code in this format
+Hi Dr Malloy,
 
-2
+
+I'm editing this because I realized the format in which I submitted my individual work does not exactly align with the specifications you outlined in the project description.  
+
+For clarification:
+
+
+the file cs412_maxClique_exact.py is my exact solution code.
+
+the file input_file.txt contains sample inputs that are run by my shell script
+
+the file shelscript.sh is my shell script which runs the inputs on my input_file.txt file. shelscript.sh also contains a series of test cases with their expected outputs commented next to them. 
+
+
+
+to run my code with custom input, simply type 
+/your-file-path/cs412_maxClique_exact.py or press the run button on vs-code/eclipse
+
+then type an input formated with the first line indicating the number of edges, and all lines after describing each edge once
+
+here's a triangle for example:
+
+3
 a b
 b c
+c a
+
+The expected output is {a, b, c}
+
+
+
+to run the shellscript, simply type 
+
+chmod +x shelscript.sh
+
+then type:
+
+./shelscript.sh 
+
+
+
+Everything else in this file I sumbitted 1 day late, but as we discussed during your office hours, I am going to apply my last late day for that. 
+This readme file I am submitting 3 days late, so you are feee to doc me late points on this. 
